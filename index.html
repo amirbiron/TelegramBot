@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>מדריך מקיף: איך לבנות בוטים יעילים ומקצועיים</title>
+    
+    <!-- Highlight.js for syntax highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/yaml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/dockerfile.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -252,8 +260,8 @@
         }
         
         .code-block {
-            background: #2d2d2d;
-            color: #f8f8f2;
+            background: #282c34;
+            color: #abb2bf;
             border-radius: 10px;
             padding: 20px;
             margin: 20px 0;
@@ -264,20 +272,21 @@
             text-align: left;
             line-height: 1.6;
             position: relative;
-            white-space: pre-wrap;
-            word-wrap: break-word;
         }
         
-        /* Syntax highlighting for Python */
-        .code-block .keyword { color: #ff79c6; font-weight: bold; }
-        .code-block .string { color: #f1fa8c; }
-        .code-block .comment { color: #6272a4; font-style: italic; }
-        .code-block .function { color: #50fa7b; }
-        .code-block .number { color: #bd93f9; }
-        .code-block .operator { color: #ff79c6; }
-        .code-block .builtin { color: #8be9fd; }
-        .code-block .decorator { color: #50fa7b; }
-        .code-block .class-name { color: #8be9fd; font-weight: bold; }
+        .code-block pre {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .code-block code {
+            background: transparent;
+            border: none;
+            padding: 0;
+            color: inherit;
+            font-size: 1em;
+            display: block;
+        }
         
         .code-block::before {
             content: attr(data-lang);
@@ -1627,5 +1636,32 @@ class AlertManager:
             </p>
         </footer>
     </div>
+    
+    <script>
+        // Apply syntax highlighting to all code blocks
+        document.addEventListener('DOMContentLoaded', (event) => {
+            document.querySelectorAll('.code-block').forEach((block) => {
+                // Wrap content in code and pre tags if not already wrapped
+                if (!block.querySelector('code')) {
+                    const content = block.textContent;
+                    
+                    // Create elements safely using DOM API
+                    const pre = document.createElement('pre');
+                    const code = document.createElement('code');
+                    code.textContent = content;
+                    
+                    pre.appendChild(code);
+                    block.textContent = ''; // Clear original content
+                    block.appendChild(pre);
+                }
+                
+                // Apply highlighting
+                const codeElement = block.querySelector('code');
+                if (codeElement) {
+                    hljs.highlightElement(codeElement);
+                }
+            });
+        });
+    </script>
 </body>
-        </html>
+</html>
