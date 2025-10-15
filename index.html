@@ -1643,8 +1643,16 @@ class AlertManager:
             document.querySelectorAll('.code-block').forEach((block) => {
                 // Wrap content in code and pre tags if not already wrapped
                 if (!block.querySelector('code')) {
-                    const content = block.innerHTML;
-                    block.innerHTML = `<pre><code>${content}</code></pre>`;
+                    const content = block.textContent;
+                    
+                    // Create elements safely using DOM API
+                    const pre = document.createElement('pre');
+                    const code = document.createElement('code');
+                    code.textContent = content;
+                    
+                    pre.appendChild(code);
+                    block.textContent = ''; // Clear original content
+                    block.appendChild(pre);
                 }
                 
                 // Apply highlighting
