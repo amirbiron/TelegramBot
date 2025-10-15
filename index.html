@@ -264,7 +264,20 @@
             text-align: left;
             line-height: 1.6;
             position: relative;
+            white-space: pre-wrap;
+            word-wrap: break-word;
         }
+        
+        /* Syntax highlighting for Python */
+        .code-block .keyword { color: #ff79c6; font-weight: bold; }
+        .code-block .string { color: #f1fa8c; }
+        .code-block .comment { color: #6272a4; font-style: italic; }
+        .code-block .function { color: #50fa7b; }
+        .code-block .number { color: #bd93f9; }
+        .code-block .operator { color: #ff79c6; }
+        .code-block .builtin { color: #8be9fd; }
+        .code-block .decorator { color: #50fa7b; }
+        .code-block .class-name { color: #8be9fd; font-weight: bold; }
         
         .code-block::before {
             content: attr(data-lang);
@@ -440,7 +453,7 @@
 <body>
     <div class="container">
         <header>
-            <h1>🤖 המדריך המקיף לבניית בוטים יעילים</h1>
+            <h1>🤖 מדריך מקיף ליצירת בוטים יציבים בטלגרם</h1>
             <p class="subtitle">
                 לקחים מעשיים מפרויקט Code Keeper Bot - 
                 איך לבנות בוטים יציבים, מהירים ומקצועיים עם ארכיטקטורה נכונה, 
@@ -509,6 +522,7 @@
                         <div class="feature-title">📱 שכבת Handlers</div>
                         <div class="feature-content">
                             <p>מטפלים בקלט מהמשתמש ומנתבים לפעולות המתאימות.</p>
+                            <p style="margin-top: 15px; color: #6c757d; font-size: 0.95em;">הדוגמה הבאה מראה איך להגדיר handler לקובץ שמאציל את העבודה לשכבת השירות ומציג תוצאות למשתמש בצורה נקייה.</p>
                             <div class="code-block python">
 # handlers/file_view.py
 async def show_file(update, context):
@@ -531,6 +545,7 @@ async def show_file(update, context):
                         <div class="feature-title">🔧 שכבת Services</div>
                         <div class="feature-content">
                             <p>לוגיקה עסקית מרוכזת, ללא תלות בממשק המשתמש.</p>
+                            <p style="margin-top: 15px; color: #6c757d; font-size: 0.95em;">השכבה הזו מרכזת את כל הלוגיקה העסקית, כולל בדיקת הרשאות ועיבוד נתונים, בנפרד מהממשק.</p>
                             <div class="code-block python">
 # services/file_service.py
 class FileService:
@@ -551,6 +566,7 @@ class FileService:
                         <div class="feature-title">💾 שכבת Repository</div>
                         <div class="feature-content">
                             <p>גישה למסד הנתונים, מופשטת ומרוכזת.</p>
+                            <p style="margin-top: 15px; color: #6c757d; font-size: 0.95em;">דפוס Repository מפריד בין הלוגיקה העסקית לשכבת הנתונים ומאפשר החלפת מסד נתונים בקלות ומרכז את כל הפעולות על הנתונים.</p>
                             <div class="code-block python">
 # database/repository.py
 class FileRepository:
@@ -572,6 +588,7 @@ class FileRepository:
                         <div class="feature-title">🌐 Conversation States</div>
                         <div class="feature-content">
                             <p>ניהול מצבי שיחה מרכזי ומסודר.</p>
+                            <p style="margin-top: 15px; color: #6c757d; font-size: 0.95em;">ConversationHandler מאפשר ניהול שיחות רב-שלביות עם המשתמש, כמו תהליך שמירת קוד.</p>
                             <div class="code-block python">
 # handlers/states.py
 GET_CODE, GET_FILENAME, GET_NOTE = range(3)
@@ -593,6 +610,7 @@ conv_handler = ConversationHandler(
                 
                 <div class="best-practice">
                     <p>השתמש ב-async/await בכל מקום אפשרי למניעת חסימות ושיפור ביצועים:</p>
+                    <p style="margin-top: 15px; color: #6c757d; font-size: 0.95em;">עיבוד אסינכרוני מאפשר טיפול במספר בקשות במקביל ושיפור דרמטי בביצועים.</p>
                     <div class="code-block python">
 # עיבוד אסינכרוני יעיל
 async def process_multiple_files(files):
@@ -616,6 +634,7 @@ class LazyLoader:
                 
                 <div class="highlight-box">
                     <h4>מבנה תיקיות מומלץ</h4>
+                    <p style="margin-top: 15px; color: #6c757d; font-size: 0.95em;">מבנה תיקיות מסודר מאפשר תחזוקה קלה ופיתוח מהיר. כל רכיב במקום המתאים לו.</p>
                     <div class="code-block bash">
 project/
 ├── handlers/         # מטפלי פקודות
@@ -646,7 +665,7 @@ project/
                 <div class="card">
                     <h4>למה Structured Logging?</h4>
                     <p>לוגים מובנים מאפשרים חיפוש וניתוח קלים, correlation בין אירועים, ואינטגרציה עם כלי ניטור.</p>
-                    
+                    <p style="margin-top: 15px; color: #6c757d; font-size: 0.95em;">structlog יוצר לוגים בפורמט JSON עם context אוטומטי, מה שמקל על חיפוש וניתוח בכלי ניטור.</p>
                     <div class="code-block python">
 # observability.py
 import structlog
@@ -679,6 +698,7 @@ logger.info("file_saved",
                     <div class="feature-card">
                         <div class="feature-title">מדידת ביצועים</div>
                         <div class="feature-content">
+                            <p style="margin-bottom: 15px; color: #6c757d; font-size: 0.95em;">Prometheus מאפשר איסוף מטריקות בזמן אמת ויצירת גרפים ו-alerts על ביצועי המערכת.</p>
                             <div class="code-block python">
 # metrics.py
 from prometheus_client import Counter, Histogram, Gauge
@@ -704,6 +724,7 @@ def track_performance(operation: str):
                     <div class="feature-card">
                         <div class="feature-title">Request ID Tracking</div>
                         <div class="feature-content">
+                            <p style="margin-bottom: 15px; color: #6c757d; font-size: 0.95em;">Request ID ייחודי לכל בקשה מאפשר מעקב אחר כל הפעולות הקשורות אליה בלוגים.</p>
                             <div class="code-block python">
 # Correlation ID לכל בקשה
 def generate_request_id() -> str:
@@ -729,6 +750,7 @@ async def handle_update(update, context):
                 <h3>🚨 Error Tracking עם Sentry</h3>
                 
                 <div class="best-practice">
+                    <p style="margin-bottom: 15px; color: #6c757d; font-size: 0.95em;">Sentry אוסף אוטומטית שגיאות בפרודקשן ומספק context מלא כולל stack trace ומשתנים.</p>
                     <div class="code-block python">
 # אינטגרציה עם Sentry
 import sentry_sdk
@@ -828,7 +850,7 @@ class DatabaseManager:
                         <span class="badge">ביצועים</span>
                         אסטרטגיית Cache יעילה
                     </h4>
-                    
+                    <p style="margin-top: 15px; color: #6c757d; font-size: 0.95em;">Redis cache עם decorators אוטומטיים מאיץ את הבוט פי כמה ומפחית עומס על ה-DB.</p>
                     <div class="code-block python">
 # cache_manager.py
 class CacheManager:
@@ -873,6 +895,7 @@ def cached(expire_seconds=300, key_prefix=""):
                 
                 <div class="highlight-box">
                     <h4>עיבוד יעיל של מספר רב של פריטים</h4>
+                    <p style="margin-top: 15px; color: #6c757d; font-size: 0.95em;">עיבוד batch עם ThreadPoolExecutor מאפשר טיפול יעיל במספר רב של קבצים במקביל.</p>
                     <div class="code-block python">
 class BatchProcessor:
     def __init__(self):
@@ -933,6 +956,7 @@ class BatchProcessor:
                 <div class="feature-card">
                     <div class="feature-title">Mock חכם עם pytest</div>
                     <div class="feature-content">
+                        <p style="margin-bottom: 15px; color: #6c757d; font-size: 0.95em;">הדוגמה הבאה מציגה איך לבדוק פונקציות אסינכרוניות עם pytest ו-AsyncMock, כולל בדיקה של מקרים מוצלחים ושגיאות צפויות.</p>
                         <div class="code-block python">
 # tests/test_file_service.py
 import pytest
@@ -977,6 +1001,7 @@ async def test_get_file_not_found(file_service):
                 
                 <div class="card">
                     <h4>הגדרת pytest עם coverage</h4>
+                    <p style="margin-top: 15px; color: #6c757d; font-size: 0.95em;">קובץ הגדרות pytest שמבטיח כיסוי קוד מינימלי ויוצר דוחות coverage אוטומטיים.</p>
                     <div class="code-block yaml">
 # pytest.ini
 [pytest]
@@ -1001,6 +1026,7 @@ coverage:
                 
                 <div class="best-practice">
                     <h4>GitHub Actions לבדיקות אוטומטיות</h4>
+                    <p style="margin-top: 15px; color: #6c757d; font-size: 0.95em;">CI pipeline שמריץ בדיקות אוטומטית על כל push ו-PR, כולל מספר גרסאות Python.</p>
                     <div class="code-block yaml">
 # .github/workflows/ci.yml
 name: CI Pipeline
@@ -1046,6 +1072,7 @@ jobs:
                 
                 <div class="card">
                     <h4>JSON Structured Logging</h4>
+                    <p style="margin-top: 15px; color: #6c757d; font-size: 0.95em;">לוגים בפורמט JSON מאפשרים חיפוש וניתוח קל בכלי ניטור כמו Elasticsearch או CloudWatch.</p>
                     <div class="code-block python">
 # לוג דוגמה בפורמט JSON
 {
@@ -1103,6 +1130,7 @@ logger.info(
                 <h3>🛡️ הסתרת מידע רגיש</h3>
                 
                 <div class="warning">
+                    <p style="margin-bottom: 15px; color: #6c757d; font-size: 0.95em;">פונקציה להסתרת מידע רגיש בלוגים - חיונית למניעת חשיפת סיסמאות וטוקנים.</p>
                     <div class="code-block python">
 def redact_sensitive(event_dict):
     """הסתרת מידע רגיש בלוגים"""
@@ -1135,6 +1163,7 @@ def redact_sensitive(event_dict):
                 
                 <div class="card">
                     <h4>הצפנת טוקנים ב-Database</h4>
+                    <p style="margin-top: 15px; color: #6c757d; font-size: 0.95em;">הצפנת מידע רגיש לפני שמירה ב-DB עם Fernet encryption - חיונית להגנה על נתוני משתמשים.</p>
                     <div class="code-block python">
 # secret_manager.py
 from cryptography.fernet import Fernet
@@ -1167,9 +1196,10 @@ db.save_user_token(user_id, encrypted_token)</div>
                 <h3>⚡ Rate Limiting</h3>
                 
                 <div class="feature-card">
-                    <div class="feature-title">הגבלת קצב בקשות</div>
-                    <div class="feature-content">
-                        <div class="code-block python">
+                        <div class="feature-title">הגבלת קצב בקשות</div>
+                        <div class="feature-content">
+                            <p style="margin-bottom: 15px; color: #6c757d; font-size: 0.95em;">Rate limiting מונע spam והתקפות DDoS על הבוט שלך ומגן על המשאבים.</p>
+                            <div class="code-block python">
 class RateLimiter:
     def __init__(self, max_per_minute: int = 30):
         self.max_per_minute = max_per_minute
@@ -1241,6 +1271,7 @@ def rate_limited(max_per_minute=30):
                 
                 <div class="card">
                     <h4>טעינה עצלה לקבצים גדולים</h4>
+                    <p style="margin-top: 15px; color: #6c757d; font-size: 0.95em;">Lazy loading עם pagination מאפשר הצגת קבצים גדולים בלי לטעון את כולם לזכרון.</p>
                     <div class="code-block python">
 class LazyLoader:
     def __init__(self):
@@ -1280,6 +1311,7 @@ class LazyLoader:
                 <h3>🔄 Connection Pooling</h3>
                 
                 <div class="best-practice">
+                    <p style="margin-bottom: 15px; color: #6c757d; font-size: 0.95em;">כך מגדירים מאגר חיבורים (pool) למסד הנתונים ול-Redis כדי לשפר ביצועים ולהפחית עומס על השרת.</p>
                     <div class="code-block python">
 # ניהול חיבורים יעיל
 class DatabasePool:
@@ -1308,24 +1340,6 @@ redis_pool = redis.ConnectionPool(
                 
                 <h3>📊 Performance Metrics</h3>
                 
-                <div class="metric-grid">
-                    <div class="metric-card">
-                        <div class="metric-value">&lt;200ms</div>
-                        <div class="metric-label">זמן תגובה ממוצע</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">10K+</div>
-                        <div class="metric-label">בקשות בדקה</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">99.9%</div>
-                        <div class="metric-label">זמינות</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">3 שניות</div>
-                        <div class="metric-label">זמן אתחול</div>
-                    </div>
-                </div>
             </section>
             
             <!-- תחזוקה -->
@@ -1339,6 +1353,7 @@ redis_pool = redis.ConnectionPool(
                 
                 <div class="card">
                     <h4>עדכוני תלויות אוטומטיים</h4>
+                    <p style="margin-top: 15px; color: #6c757d; font-size: 0.95em;">Dependabot יוצר PRs אוטומטיים לעדכוני תלויות ושומר על האפליקציה מעודכנת ומאובטחת.</p>
                     <div class="code-block yaml">
 # .github/dependabot.yml
 version: 2
@@ -1366,6 +1381,7 @@ updates:
                     <div class="feature-card">
                         <div class="feature-title">Multi-stage Build</div>
                         <div class="feature-content">
+                            <p style="margin-bottom: 15px; color: #6c757d; font-size: 0.95em;">זהו מבנה Docker דו-שלבי (multi-stage) שמקטין את גודל התמונה ומשפר את מהירות הפריסה.</p>
                             <div class="code-block dockerfile">
 # Stage 1: Builder
 FROM python:3.12-slim AS builder
@@ -1397,6 +1413,7 @@ CMD ["python", "main.py"]</div>
                     <div class="feature-card">
                         <div class="feature-title">Deployment Strategy</div>
                         <div class="feature-content">
+                            <p style="margin-bottom: 15px; color: #6c757d; font-size: 0.95em;">קובץ הגדרות ל-Render.com עם auto-deploy מה-main branch ובדיקות תקינות אוטומטיות.</p>
                             <div class="code-block yaml">
 # render.yaml
 services:
@@ -1428,6 +1445,7 @@ services:
                 <h3>🔄 Graceful Shutdown</h3>
                 
                 <div class="best-practice">
+                    <p style="margin-bottom: 15px; color: #6c757d; font-size: 0.95em;">הקטע הבא מדגים סגירה מבוקרת של תהליכים בבוט כדי למנוע איבוד נתונים או תקיעות.</p>
                     <div class="code-block python">
 # main.py
 import signal
@@ -1478,6 +1496,7 @@ if __name__ == "__main__":
                         <li>📊 מטריקות ביצועים - דשבורד real-time</li>
                     </ul>
                     
+                    <p style="margin-top: 15px; color: #6c757d; font-size: 0.95em;">Alert Manager חכם שמחליט אילו שגיאות דורשות התראה מיידית ואילו לא, כדי למנוע spam.</p>
                     <div class="code-block python">
 # Alert manager
 class AlertManager:
@@ -1587,8 +1606,7 @@ class AlertManager:
         <footer>
             <p>
                 📚 מבוסס על הניסיון מפיתוח <strong>Code Keeper Bot</strong> - 
-                בוט Telegram מתקדם לניהול קוד עם 10,000+ שורות קוד, 
-                80%+ כיסוי בדיקות, ותמיכה במאות משתמשים
+                בוט Telegram מתקדם לניהול קוד עם 10,000+ שורות קוד
             </p>
             <div class="footer-links">
                 <a href="https://github.com/amirbiron/CodeBot" target="_blank">🔗 GitHub Repository</a>
