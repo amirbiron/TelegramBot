@@ -306,6 +306,39 @@
         .code-block.bash::before { content: 'Bash'; }
         .code-block.dockerfile::before { content: 'Dockerfile'; }
         
+        .copy-button {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: #495057;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 5px;
+            font-size: 0.8em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            z-index: 10;
+        }
+        
+        .copy-button:hover {
+            background: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+        }
+        
+        .copy-button.copied {
+            background: #28a745;
+        }
+        
+        .copy-button.copied::before {
+            content: '✓ ';
+        }
+        
         .highlight-box {
             background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
             border-radius: 15px;
@@ -1660,6 +1693,40 @@ class AlertManager:
                 if (codeElement) {
                     hljs.highlightElement(codeElement);
                 }
+                
+                // Add copy button
+                const copyButton = document.createElement('button');
+                copyButton.className = 'copy-button';
+                copyButton.textContent = 'העתק';
+                copyButton.setAttribute('aria-label', 'העתק קוד ללוח');
+                
+                copyButton.addEventListener('click', async () => {
+                    try {
+                        // Get the code text (without HTML tags)
+                        const codeText = block.querySelector('code').textContent;
+                        
+                        // Copy to clipboard
+                        await navigator.clipboard.writeText(codeText);
+                        
+                        // Visual feedback
+                        copyButton.textContent = 'הועתק!';
+                        copyButton.classList.add('copied');
+                        
+                        // Reset button after 2 seconds
+                        setTimeout(() => {
+                            copyButton.textContent = 'העתק';
+                            copyButton.classList.remove('copied');
+                        }, 2000);
+                    } catch (err) {
+                        console.error('Failed to copy code:', err);
+                        copyButton.textContent = 'שגיאה';
+                        setTimeout(() => {
+                            copyButton.textContent = 'העתק';
+                        }, 2000);
+                    }
+                });
+                
+                block.appendChild(copyButton);
             });
         });
     </script>
